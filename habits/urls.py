@@ -17,9 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from habits.apps import HabitsConfig
+from rest_framework.routers import DefaultRouter
+from habits.views import HabitsViewSet
 
 app_name = HabitsConfig.name
 
+router = DefaultRouter()
+router.register(r'habit', HabitsViewSet, basename='habit')
+
 urlpatterns = [
-    # path('payment/', PaymentListAPIView.as_view(), name='payment_list'),
+    path('api/v1/', include(router.urls)),
 ]
