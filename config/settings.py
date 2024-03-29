@@ -163,8 +163,30 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8000", #  Замените на адрес вашего фронтенд-сервера
+    "http://localhost:8000",  # Замените на адрес вашего фронтенд-сервера
     # и добавьте адрес бэкенд-сервера
 ]
 
 CORS_ALLOW_ALL_ORIGINS = False
+
+# URL-адрес брокера сообщений
+CELERY_BROKER_URL = os.getenv('CELERY_HOST')  # Например, Redis, который по умолчанию работает на порту 6379
+# URL-адрес брокера результатов, также Redis
+CELERY_RESULT_BACKEND = os.getenv('CELERY_HOST')
+# Часовой пояс для работы Celery
+CELERY_TIMEZONE = "UTC"
+# Флаг отслеживания выполнения задач
+CELERY_TASK_TRACK_STARTED = True
+# Максимальное время на выполнение задачи
+CELERY_TASK_TIME_LIMIT = 30 * 60
+# CELERY_TASK_SERIALIZER = 'JSON'
+# CELERY_RESULT_SERIALIZER = 'JSON'
+CELERY_BEAT_SCHEDULE = {
+    'task-name': {
+        'task': 'habits.tasks.inform',  # Путь к задаче
+        'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
+    },
+}
+
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
