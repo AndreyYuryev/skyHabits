@@ -35,7 +35,7 @@ class Habit(models.Model):
     place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='место применения', **NULLABLE)
     interval = models.ForeignKey(Interval, on_delete=models.CASCADE, verbose_name='периодичность', **NULLABLE)
     started_on = models.DateTimeField(default=timezone.now, verbose_name='начало действия')
-    is_pleasant = models.BooleanField(default=False)
+    is_pleasant = models.BooleanField(default=False, verbose_name='приятная привычка')
     linked_habit = models.ForeignKey('Habit', on_delete=models.SET_NULL,
                                      verbose_name='связанная привычка', **NULLABLE)
     reward = models.CharField(max_length=100, verbose_name='вознаграждение', **NULLABLE)
