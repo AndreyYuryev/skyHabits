@@ -10,7 +10,7 @@ class ExecutionTimeValidator:
 
     def __call__(self, value):
         field_value = dict(value).get(self.field)
-        if int(field_value) >= 120:
+        if int(field_value) > 120:
             raise ValidationError('Время выполнения не более 120 секунд')
 
 

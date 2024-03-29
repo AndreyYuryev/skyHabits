@@ -19,7 +19,7 @@ class IntervalSerializer(serializers.ModelSerializer):
 
 
 class HabitSerializer(serializers.ModelSerializer):
-    # subscribed = serializers.HiddenField(default=True)
+    created_by = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Habit
@@ -27,5 +27,5 @@ class HabitSerializer(serializers.ModelSerializer):
         validators = [ExecutionTimeValidator(field='execution_time'),
                       HabitAndRewardValidator(habit='linked_habit', reward='reward'),
                       PleasantHabitValidator(pleasant='is_pleasant', reward='reward',
-                                              linked_habit='linked_habit'),
-                      LinkedHabitValidator(linked_habit='linked_habit'),]
+                                             linked_habit='linked_habit'),
+                      LinkedHabitValidator(linked_habit='linked_habit'), ]

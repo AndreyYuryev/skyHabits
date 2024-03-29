@@ -29,6 +29,7 @@ class Interval(models.Model):
         verbose_name = 'Интервал'
         verbose_name_plural = 'Интервалы'
 
+
 class Habit(models.Model):
     action = models.CharField(max_length=100, verbose_name='действие')
     created_by = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='пользователь')
@@ -48,3 +49,4 @@ class Habit(models.Model):
     class Meta:
         verbose_name = 'Привычка'
         verbose_name_plural = 'Привычки'
+        ordering = ['id']
