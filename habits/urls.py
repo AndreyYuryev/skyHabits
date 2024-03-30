@@ -14,17 +14,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path, include
 from habits.apps import HabitsConfig
 from rest_framework.routers import DefaultRouter
-from habits.views import HabitsViewSet
+from habits.views import HabitViewSet, PlaceViewSet, IntervalViewSet, PublicHabitListAPIView
 
 app_name = HabitsConfig.name
 
 router = DefaultRouter()
-router.register(r'habit', HabitsViewSet, basename='habit')
+router.register(r'place', PlaceViewSet, basename='place')
+router.register(r'interval', IntervalViewSet, basename='interval')
+router.register(r'habit', HabitViewSet, basename='habit')
 
 urlpatterns = [
+    path('api/v1/public/', PublicHabitListAPIView.as_view(), name='public-list'),
     path('api/v1/', include(router.urls)),
 ]
