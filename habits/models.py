@@ -20,7 +20,7 @@ class Interval(models.Model):
     name = models.CharField(max_length=100, verbose_name='название интервала')
     days = models.IntegerField(default=0, verbose_name='интервал в днях')
     hours = models.IntegerField(default=0, verbose_name='интервал в часах')
-    minutes = models.IntegerField(verbose_name='интервал в минутах')
+    minutes = models.IntegerField(default=0, verbose_name='интервал в минутах')
 
     def __str__(self):
         return f'{self.name} - {self.days} дней {self.hours} часов {self.minutes} минут'

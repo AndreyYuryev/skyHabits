@@ -124,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -174,7 +174,7 @@ CELERY_BROKER_URL = os.getenv('CELERY_HOST')  # Например, Redis, кот�
 # URL-адрес брокера результатов, также Redis
 CELERY_RESULT_BACKEND = os.getenv('CELERY_HOST')
 # Часовой пояс для работы Celery
-CELERY_TIMEZONE = "UTC"
+CELERY_TIMEZONE = "Europe/Moscow"
 # Флаг отслеживания выполнения задач
 CELERY_TASK_TRACK_STARTED = True
 # Максимальное время на выполнение задачи
@@ -183,7 +183,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 # CELERY_RESULT_SERIALIZER = 'JSON'
 CELERY_BEAT_SCHEDULE = {
     'task-name': {
-        'task': 'habits.tasks.inform',  # Путь к задаче
+        'task': 'habits.tasks.notify',  # Путь к задаче
         'schedule': timedelta(minutes=1),  # Расписание выполнения задачи (например, каждые 10 минут)
     },
 }
