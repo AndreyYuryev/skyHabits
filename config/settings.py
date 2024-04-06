@@ -20,14 +20,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load data from .env files
 filepath = os.path.join(BASE_DIR, '.env')
+filepath_dk = os.path.join(BASE_DIR, '.env.docker')
 if os.path.exists(filepath):
     load_dotenv(filepath)
+elif os.path.exists(filepath_dk):
+    load_dotenv(filepath_dk)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-dx-usjrk#0)0c=+vl-+1b^_9%6=_(=oo-(d#4(^&ysxxz@0sh('
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -160,14 +164,18 @@ SIMPLE_JWT = {
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8000',  # Замените на адрес вашего фронтенд-сервера
+    'http://127.0.0.1:8000',
+    'http://0.0.0.0:8000',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",  # Замените на адрес вашего фронтенд-сервера
     # и добавьте адрес бэкенд-сервера
+    'http://0.0.0.0:8000',
+    'http://127.0.0.1:8000',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOW_ALL_ORIGINS = True
 
 # URL-адрес брокера сообщений
 CELERY_BROKER_URL = os.getenv('CELERY_HOST')  # Например, Redis, который по умолчанию работает на порту 6379
